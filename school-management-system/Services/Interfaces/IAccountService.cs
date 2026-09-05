@@ -1,6 +1,6 @@
 ﻿using school_management_system.DbModels;
 
-namespace school_management_system
+namespace school_management_system.Services.Interfaces
 {
     public interface IAccountService
     {
