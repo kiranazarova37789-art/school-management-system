@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using school_management_system.DbModels;
 using school_management_system.DbModels.Enums;
+using school_management_system.Services.Interfaces;
 using SchoolProject.Data;
 
 namespace school_management_system.Services

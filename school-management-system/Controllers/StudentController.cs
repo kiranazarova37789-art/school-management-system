@@ -1,20 +1,36 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using school_management_system.Services.Interfaces;
+using System.Security.Claims;
 
 namespace school_management_system.Controllers
 {
     public class StudentController : Controller
     {
+        private readonly IProfileService _profileService;
+
+        public StudentController (IProfileService profileService)
+        {
+            _profileService = profileService;
+        }
+
         // GET: StudentController
-        public ActionResult Index()
+        public IActionResult Index()
         {
             return View();
         }
 
         // GET: StudentController/Details/5
-        public ActionResult Details(int id)
+        public async Task<IActionResult> Profile()
         {
-            return View();
+            int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            var profile = await _profileService.GetStudentProfileAsync(userId);
+            if(profile == null)
+            {
+                return NotFound();
+            }
+            return View(profile);
         }
 
         // GET: StudentController/Create
